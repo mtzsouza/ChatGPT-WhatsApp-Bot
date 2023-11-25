@@ -13,19 +13,20 @@ client.on('qr', qr => {
 
 // Listens for messages
 client.on('message_create', async message => {
-    contact_id = message.from;
     text_received = message.body.toLowerCase();
     response = ""
-    
+
+    // For connection tests
+    if(text_received === "ping") {
+        message.reply("pong");
+    }
+	
+    // ChatGPT will only respond when it receives a message that starts with '#'
     if(text_received[0] === "#") {
         prompt = text_received.slice(1);
         response = await generateMeta(prompt);
         message.reply(response);
-	}
-
-    if(text_received === "ping") {
-        message.reply("pong");
-	}
+    }
 });
 
 client.initialize();
