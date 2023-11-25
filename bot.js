@@ -11,7 +11,7 @@ client.on('qr', qr => {
     qrcode.generate(qr, {small: true});
 });
 
-// Listens for messages
+// Listens for all created messages (including you own)
 client.on('message_create', async message => {
     text_received = message.body.toLowerCase();
     response = ""
